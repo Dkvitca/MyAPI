@@ -1,13 +1,14 @@
+/* eslint-disable no-console */
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 
 process.on('uncaughtException', err => {
-  console.log('UNCAUGHT EXCEPTION! Shutting down...');
+  console.log('UNCAUGHT EXCEPTION! 💥 Shutting down...');
   console.log(err.name, err.message);
   process.exit(1);
 });
 
-dotenv.config({ path: './config.env' });
+dotenv.config({ path: '.env' });
 const app = require('./app');
 
 const DB = process.env.DATABASE.replace(
@@ -19,7 +20,7 @@ mongoose
   .connect(DB, {
     useNewUrlParser: true,
     useCreateIndex: true,
-    useFindAndModify: true
+    useFindAndModify: false
   })
   .then(() => console.log('DB connection successful!'));
 

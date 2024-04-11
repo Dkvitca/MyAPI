@@ -1,4 +1,7 @@
+/* eslint-disable no-console */
 const mongoose = require('mongoose');
+// eslint-disable-next-line no-unused-vars
+const { type } = require('os');
 const slugify = require('slugify');
 // const validator = require('validator');
 
@@ -65,7 +68,7 @@ const tourSchema = new mongoose.Schema(
     },
     imageCover: {
       type: String,
-      required: [false, 'A tour must have a cover image']
+      required: [true, 'A tour must have a cover image']
     },
     images: [String],
     createdAt: {
@@ -77,6 +80,28 @@ const tourSchema = new mongoose.Schema(
     secretTour: {
       type: Boolean,
       default: false
+    },
+    startLocation: {
+      //GeoJson
+      type: {
+        type: String,
+        default: 'Point',
+        enum: ['Point']
+      },
+      coorrdinates: [Number],
+      address: String,
+      description: String
+    },
+    locations: {
+      type: {
+        type: String,
+        default: 'Point',
+        enum: ['Point']
+      },
+      coorrdinates: [Number],
+      address: String,
+      description: String,
+      day: Number
     }
   },
   {
